@@ -12,7 +12,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     env:
-      PYENV_ROOT: $GITHUB_WORKSPACE/pyenv
+      PYENV_ROOT: ${{ env.GITHUB_WORKSPACE }}/pyenv
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -29,11 +29,9 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
           TZ: Europe/London
         run: sudo apt-get install -y make build-essential git libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-      - id: pyenv
-        run: echo "::set-output name=pyenv::$PYENV_ROOT/bin/pyenv"
       - name: Build
         env:
-          PYENV_BIN: ${{ steps.pyenv.outputs.pyenv }}
+          PYENV_BIN: ${{ env.PYENV_ROOT }}/bin/pyenv
         run: |
           eval "$($PYENV_BIN init --path)"
           echo "3.9.9" > .python-version
