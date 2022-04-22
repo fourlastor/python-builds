@@ -36,3 +36,11 @@ jobs:
           eval "$($PYENV_BIN init --path)"
           echo "3.9.9" > .python-version
           $PYENV_BIN install $($PYENV_BIN local)
+      - name: Zip
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r python-3.9.9.zip PYENV_ROOT/versions/3.9.9
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: python-3.9.9.zip
