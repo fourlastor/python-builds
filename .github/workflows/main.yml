@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: pyenv/pyenv
+          path: pyenv
+      # Runs a single command using the runners shell
+      - name: Install APT
+        env:
+          DEBIAN_FRONTEND: noninteractive
+          TZ: Europe/London
+        run: apt-get install -y make build-essential git libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+      - name: Build
+        env:
+          PYENV_ROOT: $GITHUB_WORKSPACE/pyenv
+          PATH: $PYENV_ROOT/bin:$PATH
+        run: |
+          eval "$(pyenv init --path)"
+          echo "3.9.9" > .python-version
+          pyenv install $(pyenv local)
