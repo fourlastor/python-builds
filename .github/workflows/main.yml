@@ -35,4 +35,4 @@ jobs:
         run: |
           eval "$($PYENV_BIN init --path)"
           echo "3.9.9" > .python-version
-          pyenv install $($PYENV_BIN local)
+          $PYENV_BIN install $($PYENV_BIN local)
