@@ -27,7 +27,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
           TZ: Europe/London
-        run: apt-get install -y make build-essential git libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+        run: sudo apt-get install -y make build-essential git libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
       - name: Build
         env:
           PYENV_ROOT: $GITHUB_WORKSPACE/pyenv
