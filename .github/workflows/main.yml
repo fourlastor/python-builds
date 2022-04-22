@@ -13,6 +13,8 @@ jobs:
   build:
     env:
       PYENV_ROOT: ${{ github.workspace }}/pyenv
+      PYTHON_ZIP_NAME: python-3.9.9.tar.gz
+      PYTHON_VERSION: 3.9.9
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -34,11 +36,11 @@ jobs:
           PYENV_BIN: ${{ env.PYENV_ROOT }}/bin/pyenv
         run: |
           eval "$($PYENV_BIN init --path)"
-          echo "3.9.9" > .python-version
+          echo $PYTHON_VERSION > .python-version
           $PYENV_BIN install $($PYENV_BIN local)
       - name: Zip
-        run: tar -czf python-3.9.9.tar.gz $PYENV_ROOT/versions/3.9.9
+        run: tar -czf $PYTHON_ZIP_NAME $PYENV_ROOT/versions/$PYTHON_VERSION
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: python-3.9.9.zip
+          files: $PYTHON_ZIP_NAME
