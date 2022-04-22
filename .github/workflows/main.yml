@@ -9,17 +9,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  variables:
-    runs-on: ubuntu-latest
-    # Map a step output to a job output
-    outputs:
-      pyenv_bin: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step2.outputs.test }}
-    steps:
-      - id: step1
-        run: echo "::set-output name=test::hello"
-      - id: step2
-        run: echo "::set-output name=test::world"
   # This workflow contains a single job called "build"
   build:
     env:
