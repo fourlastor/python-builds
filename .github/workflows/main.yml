@@ -37,7 +37,7 @@ jobs:
           echo "3.9.9" > .python-version
           $PYENV_BIN install $($PYENV_BIN local)
       - name: Zip
-        run: tar -czf python-3.9.9.gz $PYENV_ROOT/versions/3.9.9
+        run: tar -czf python-3.9.9.tar.gz $PYENV_ROOT/versions/3.9.9
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
